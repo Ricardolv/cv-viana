@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricardo Luiz Viana - Perfil Profissional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#9CA3AF',
+                        accent: '#fb923c'
+                    },
+                    animation: {
+                        'spin-slow': 'spin 15s linear infinite',
+                        'fade-in': 'fadeIn 1.5s ease-in-out',
+                        'slide-in': 'slideIn 1s ease-in-out',
+                        'bounce-subtle': 'bounceSubtle 2s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-subtle': 'pulseSubtle 2s ease-in-out infinite',
+                        'float-slow': 'floatSlow 4s ease-in-out infinite',
+                        'float-hover': 'floatHover 4s ease-in-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(-2px)' },
+                            '50%': { transform: 'translateY(2px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        floatHover: {
+                            '0%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                            '100%': { transform: 'translateY(0)' }
+                        },
+                        pulseSubtle: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Inicialização do GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animação da seção de experiência
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            timelineItems.forEach((item, index) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: index * 0.2
+                });
+            });
+        });
+    </script>
+    <style>
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #fb923c;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .card {
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .bg-animate {
+            background-size: 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-sm shadow-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary">Ricardo <span class="text-accent">Viana</span></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#sobre" class="nav-link text-gray-600 hover:text-primary transition-colors">Sobre</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-primary transition-colors">Habilidades</a>
+                <a href="#experiencia" class="nav-link text-gray-600 hover:text-primary transition-colors">Experiência</a>
+                <a href="#formacao" class="nav-link text-gray-600 hover:text-primary transition-colors">Formação</a>
+                <a href="#contato" class="nav-link text-gray-600 hover:text-primary transition-colors">Contato</a>
+            </div>
+            <button class="md:hidden text-gray-600 focus:outline-none" id="menu-toggle">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white w-full absolute top-16 left-0 shadow-md" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#sobre" class="text-gray-600 hover:text-primary py-2 border-b border-gray-100">Sobre</a>
+                <a href="#skills" class="text-gray-600 hover:text-primary py-2 border-b border-gray-100">Habilidades</a>
+                <a href="#experiencia" class="text-gray-600 hover:text-primary py-2 border-b border-gray-100">Experiência</a>
+                <a href="#formacao" class="text-gray-600 hover:text-primary py-2 border-b border-gray-100">Formação</a>
+                <a href="#contato" class="text-gray-600 hover:text-primary py-2">Contato</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <header class="pt-28 pb-20 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 animate-fade-in">
+                <div class="w-64 h-64 mx-auto md:mx-0 rounded-full bg-orange-500 p-3 shadow-xl animate-float">
+                    <img src="./assets/images/ricardo-viana.png" alt="Ricardo Viana" class="w-full h-full rounded-full object-cover">
+                </div>
+            </div>
+            <div class="md:w-1/2 text-center md:text-left animate-slide-in">
+                <p class="text-accent  font-semibold mb-2">Consultor • Arquiteto de Soluções • Tech Lead</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Ricardo Viana</h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-100">
+                    Arquiteto de Soluções especializado em desenvolvimento de software, arquitetura de monólitos e arquitetura de microserviços e liderança técnica.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#contato" class="bg-accent hover:bg-orange-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg flex items-center animate-bounce-subtle">
+                        <i class="fas fa-envelope mr-2"></i> Contato
+                    </a>
+                    <a href="#experiencia" class="bg-white hover:bg-gray-100 text-primary font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg flex items-center animate-bounce-subtle" style="animation-delay: 0.2s">
+                        <i class="fas fa-briefcase mr-2"></i> Experiência
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-6 text-primary">Sobre <span class="text-accent">Mim</span></h2>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Profissional altamente experiente com mais de uma década de carreira na área de tecnologia, atuando como Consultor, Tech Lead, Chapter Lead e Arquiteto de Soluções.
+                    </p>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Atualmente, trabalho na Radix Engenharia e Software, onde lidero equipes e desenvolvo soluções inovadoras para o setor de varejo. Entre minhas contribuições estão a implementação de arquiteturas de microserviços para gerenciamento de produtos, modernização de sistemas de faturamento e criação de soluções para conciliação de vendas, reduzindo o tempo de processamento de 50 minutos para apenas 5 segundos.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Tenho experiências significativas em empresas como Banco Inter, BMG, Altran, Fóton Informática e várias outras, sempre contribuindo com soluções de tecnologia que impactam positivamente o negócio.
+                    </p>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-md card">
+                            <div class="text-accent text-3xl mb-4">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Arquitetura de Software</h3>
+                            <p class="text-gray-600">Especialista em arquitetura de microserviços, eventos e solucções cloud.</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-md card">
+                            <div class="text-accent text-3xl mb-4">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Desenvolvimento</h3>
+                            <p class="text-gray-600">Java, Spring, Cloud AWS, Python, TypeScript e mais.</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-md card">
+                            <div class="text-accent text-3xl mb-4">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Liderança Técnica</h3>
+                            <p class="text-gray-600">Capacitação de equipes e gestão de projetos complexos.</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-md card">
+                            <div class="text-accent text-3xl mb-4">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">DevOps</h3>
+                            <p class="text-gray-600">Docker, Kubernetes, CI/CD, AWS e monitoramento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center text-primary">Minhas <span class="text-accent">Habilidades</span></h2>
+            
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">Desenvolvimento</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Java</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Python</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Go</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">PowerShell</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">TypeScript</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">HTML5/CSS/JS</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">SQL</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Framework</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Boot</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring MVC</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Data JPA</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Cloud</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Batch</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Spring Security</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">JPA</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Hibernate</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Jakarta EE</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">REST APIs</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Angular</span>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">Bancos de Dados</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">MS SQL Server</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Oracle</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">SQLite</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">MySQL</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">PostgreSQL</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">DynamoDB</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">MongoDB</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Redis</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Elasticsearch</span>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">Arquitetura e Metodologias</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Microserviços</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Arquitetura MVC</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Arquitetura Hexagonal</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Arquitetura de Eventos</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">POO</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">SOLID</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Agile</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Scrum</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Kanban</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">UML</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">C4 Model</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">TDD</span>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">DevOps e Cloud</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">AWS</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Azure</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Docker</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Kubernetes</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Git</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">GitLab</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">CI/CD</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Grafana</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">NewRelic</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Datadog</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Kafka</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">RabbitMQ</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">AWS SQS</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Linux</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Windows</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">MacOS</span>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-semibold mb-6 text-gray-700">Idiomas</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Português - Nativo</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Inglês - Instrumental</span>
+                    <span class="skill-tag bg-white py-2 px-4 rounded-lg shadow-sm text-gray-700 border border-gray-200">Espanhol - Básico</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experiencia" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center text-primary group cursor-pointer">
+                <span class="inline-block group-hover:animate-float-hover">Experiência <span class="text-accent">Profissional</span></span>
+            </h2>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-0 md:left-1/2 transform md:translate-x-px h-full w-0.5 bg-gray-200"></div>
+                
+                <!-- Timeline items -->
+                <div class="mb-16 md:mb-24 relative group">
+                    <div class="flex flex-col md:flex-row hover:scale-105 transition-all duration-500 group-hover:animate-float-hover">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
+                            <h3 class="text-xl font-semibold mb-2 text-primary">Radix - Engenharia e Software</h3>
+                            <div class="text-accent font-medium mb-4">Consultor | Tech Lead | Abr 2022 - Presente</div>
+                            <p class="text-gray-600">
+                                Atuando como Tech Lead no setor de abastecimento e inventários, gerenciando squad e desenvolvendo novo sistema distribuído baseado em microserviços.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 bg-accent rounded-full w-8 h-8 border-4 border-white shadow"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <ul class="text-gray-700 space-y-2">
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuo como Tech Lead ao setor de abastecimento / inventarios  gerenciando squad e entregando um novo sistema distribuido, nova solução baseado em arquitetura de micro service gerenciando dados do inventário.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads ao setor de produtos desenvolvendo nova solução baseado em arquitetura de micro service gerenciando dados do produto com o novo conceito chamado de PIM (Product Information Manager).</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Chapter Lead responsável por liderar Tech Leads e Especialistas com objetivo de padronizar fluxo de desenvolvimento dando garantia da qualidade dos processos internos relativos à organização, estimular o desenvolvimento para melhor desempenho, colaboração, pensamento crítico, ética e resolução de problemas, exercendo um papel significativo de redução da pressão de stakeholders, líderes de squad e scrum masters, criando segurança psicológica, equilíbrio e confiança.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads em outro setor desenvolvendo nova solução baseado em arquitetura de micro service gerenciando criação de QR code associado ao número do pedido com os dados criptografados.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads em outro setor desenvolvendo nova solução de faturamento, conseguimos remover todo o eco sistema legado e criamos nova solução baseado em arquitetura de micro service.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads em outro setor desenvolvendo nova solução baseado em arquitetura de micro service de conciliação de vendas, conseguimos melhorar o tempo de resposta de 50 minutos para 5 segundos no processo de conciliação de vendas.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads no setor de estoque realizando a sustentação e provendo novas soluções de ajustes, conseguimos estabilizar e atender conforme expectativa do cliente.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Tech Leads criando nova solução baseado em arquitetura de micro service para gerenciar a solicitação de encomendas para todas as lojas no Brasil, assim melhorando o tempo de repostas de solicitação de encomenda, de d+1 para 8 segundos de resposta, assim flexibilizando o mesmo.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei Arquiteto de software responsavél or prestar serviço de consultoria, criando nova solução baseado em arquitetura de micro service para gerenciar a solicitação de encomendas para todas as lojas no Brasil, assim melhorando o tempo de repostas de solicitação de encomenda, de d+1 para 8 segundos de resposta, assim flexibilizando o mesmo.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Atuei como Arquiteto de software responsavél or prestar serviço de consultoria, trbalhando com projetos cloud AWS, projetos baseados na arquitetura SOFEA com stack Spring boot e framework javascript Angular.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-16 md:mb-24 relative group">
+                    <div class="flex flex-col md:flex-row hover:scale-105 transition-all duration-500 group-hover:animate-float-hover">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
+                            <h3 class="text-xl font-semibold mb-2 text-primary">Altran</h3>
+                            <div class="text-accent font-medium mb-4">Engenheiro de Software | Jul 2020 - Dez 2020</div>
+                            <p class="text-gray-600">
+                                Responsável por atuar em melhorias contínuas e auxiliar a equipe de desenvolvimento dentro do rito do Scrum.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 bg-accent rounded-full w-8 h-8 border-4 border-white shadow"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <ul class="text-gray-700 space-y-2">
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Criação de soluções para atender demandas de clientes.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Desenvolvimento em projetos monolíticos, web-apis e microsserviços.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Implementação de melhores práticas de desenvolvimento.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Fui responsavél por atuar em melhorias continuas, auxliar a equipe de desenvolvimento dentro do rito do Scrum criando soluções necessárias para atender o cliente, atuando em variados projetos, monólito, web-api e micro serviços.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-16 md:mb-24 relative group">
+                    <div class="flex flex-col md:flex-row hover:scale-105 transition-all duration-500 group-hover:animate-float-hover">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
+                            <h3 class="text-xl font-semibold mb-2 text-primary">Banco Inter</h3>
+                            <div class="text-accent font-medium mb-4">Tech Lead | Set 2019 - Jun 2020</div>
+                            <p class="text-gray-600">
+                                Liderança de squad e desenvolvimento de soluções técnicas baseadas em cloud AWS.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 bg-accent rounded-full w-8 h-8 border-4 border-white shadow"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <ul class="text-gray-700 space-y-2">
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Trabalho com projetos cloud AWS e microsserviços com Spring Boot.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Utilização de containers gerenciados com Kubernetes.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Implementação de TDD com testes de unidade e mutação</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Fui responsavél por liderar squad e auxiliar os desenvolvedores, criando soluções ténicas, usando rito do scrum, trabalhando com projetos cloud AWS, projetos micro-service, usando a stack Spring Boot e disponibilizando via containers gerenciados pelo kubernetes, ks8, atuando com as melhores praticas de desenvolvimento, TDD usando teste de unidade e teste de mutação e atuando em projeto monólito.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Fui responsavél também por confeccionar uma solução interna de geração de relatórios em um determinado segmento da empresa utilizando python, assim ganhando produtividade em nosso setor de sustentaçåo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group">
+                    <div class="flex flex-col md:flex-row hover:scale-105 transition-all duration-500 group-hover:animate-float-hover">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12 md:text-right">
+                            <h3 class="text-xl font-semibold mb-2 text-primary">Fóton Informática S.A.</h3>
+                            <div class="text-accent font-medium mb-4">Tech Lead | Fev 2019 - Set 2019</div>
+                            <p class="text-gray-600">
+                                Liderança de equipes em projetos estratégicos para a Caixa Econômica Federal.
+                            </p>
+                        </div>
+                        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 bg-accent rounded-full w-8 h-8 border-4 border-white shadow"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <ul class="text-gray-700 space-y-2">
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Liderança de equipes em projetos estratégicos para a Caixa Econômica Federal.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Desenvolvimento de soluções para atender demandas de clientes.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Implementação de melhores práticas de desenvolvimento.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Fui responsavél por liderar squad e auxiliar os desenvolvedores, criando soluções ténicas, usando rito do scrum, trabalhando com projetos legados de arquitetura monolitica, Java EE, JSF, EJB, Java 8, banco de dados postgresQl, gerenciando rprojetos com maven.</li>
+                                <li><i class="fas fa-check-circle text-accent mr-2"></i> Orquestrava mais de 4 squads em fabrica de software, documentar projetos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="formacao" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center text-primary group cursor-pointer">
+                <span class="inline-block group-hover:animate-float-hover">Formação <span class="text-accent">Acadêmica</span></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Graduação -->
+                <div class="bg-white rounded-lg shadow-lg p-8 group hover:shadow-xl transition-all duration-500 hover:scale-105 group-hover:animate-float-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-university text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-primary">Graduação</h3>
+                            <p class="text-accent">2006 - 2011</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-medium text-gray-800">Bacharelado em Sistemas de Informação</p>
+                        <p class="text-gray-600">Faculdade da Cidade de Santa Luzia – FACSAL</p>
+                        <p class="text-gray-600">Formação completa em desenvolvimento e gestão de sistemas</p>
+                    </div>
+                </div>
+
+                <!-- Certificações -->
+                <div class="bg-white rounded-lg shadow-lg p-8 group hover:shadow-xl transition-all duration-500 hover:scale-105 group-hover:animate-float-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-certificate text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-primary">Certificações</h3>
+                            <p class="text-accent">2019</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium text-gray-800">DevOps Essentials Professional Certificate (DEPC)</p>
+                            <p class="text-gray-600">CertiProf</p>
+                            <p class="text-sm text-gray-500">Emitido em Janeiro de 2019</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-medium text-gray-800">Scrum Foundation Professional Certificate (SFPC)</p>
+                            <p class="text-gray-600">CertiProf</p>
+                            <p class="text-sm text-gray-500">Emitido em Janeiro de 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cursos Complementares -->
+                <div class="bg-white rounded-lg shadow-lg p-8 group hover:shadow-xl transition-all duration-500 hover:scale-105 group-hover:animate-float-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-book text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold text-primary">Cursos Complementares</h3>
+                            <p class="text-accent">2016 - 2023</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2023</h4>
+                            <p class="text-gray-700">• Padrões de Projeto em JAVA na Prática (Udemy)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2022</h4>
+                            <p class="text-gray-700">• Curso para desenvolvimento de jobs com Spring Batch (Udemy)</p>
+                            <p class="text-gray-700">• Spring Batch com Microservices para ETL (Udemy)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2021</h4>
+                            <p class="text-gray-700">• Microservices com Spring Cloud: Circuit Breaker, Hystrix e API Gateway (Alura)</p>
+                            <p class="text-gray-700">• Microservices com Spring Cloud: Registry, Config Server e Distributed Tracing (Alura)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2020</h4>
+                            <p class="text-gray-700">• Apache Kafka para iniciantes (Udemy)</p>
+                            <p class="text-gray-700">• GitLab CI e Docker: Pipeline de Entrega Contínua (Alura)</p>
+                            <p class="text-gray-700">• Grafana e Telegraf: Monitoramento em Tempo Real (Alura)</p>
+                            <p class="text-gray-700">• Série Kafka: Produtores, Consumidores, Streams e Cluster (Alura)</p>
+                            <p class="text-gray-700">• Entrega Contínua e Integração Contínua (Alura)</p>
+                            <p class="text-gray-700">• Kubernetes: Pods, Services, Deployments e Escalabilidade (Alura)</p>
+                            <p class="text-gray-700">• Java e Clean Architecture (Alura)</p>
+                            <p class="text-gray-700">• Java e Quarkus (Alura)</p>
+                            <p class="text-gray-700">• Terraform e Ansible para Infraestrutura como Código (Alura)</p>
+                            <p class="text-gray-700">• Docker e Docker Swarm (Alura)</p>
+                            <p class="text-gray-700">• Go (Golang): Explorando a Linguagem do Google (Udemy)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2019</h4>
+                            <p class="text-gray-700">• Flutter e Dart (balta.io)</p>
+                            <p class="text-gray-700">• Formação Angular 8 com APIs Restful Java/Spring (Udemy)</p>
+                            <p class="text-gray-700">• Spring Boot 2, OAuth2 e Gitlab CI com AWS (Udemy)</p>
+                            <p class="text-gray-700">• Docker para Desenvolvedores (Udemy)</p>
+                            <p class="text-gray-700">• Django 2.0 avançado e Django Rest Framework (Udemy)</p>
+                            <p class="text-gray-700">• Bootstrap - Completo, Prático e Responsivo (Udemy)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2018</h4>
+                            <p class="text-gray-700">• Aplicativos com Ionic 3, PouchDB e CouchDB (Udemy)</p>
+                            <p class="text-gray-700">• MongoDB e Spring com OAuth2 (Udemy)</p>
+                            <p class="text-gray-700">• Testes unitários em Java: Junit, Mockito e TDD (Udemy)</p>
+                        </div>
+                        <div class="border-b pb-4">
+                            <h4 class="font-semibold text-primary mb-2">2017</h4>
+                            <p class="text-gray-700">• Angular 4 - Construindo Aplicações Web (Udemy)</p>
+                            <p class="text-gray-700">• Wildfly 11 com Spring Boot e MongoDB (Udemy)</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-primary mb-2">2016</h4>
+                            <p class="text-gray-700">• Desenvolvimento GUI com Python e Tkinter (Udemy)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-20 bg-gradient-to-r from-primary to-secondary">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center text-white group cursor-pointer">
+                <span class="inline-block group-hover:animate-float-hover">Entre em <span class="text-accent">Contato</span></span>
+            </h2>
+            
+            <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Email -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6 group hover:scale-110 transition-all duration-500 group-hover:animate-float-hover">
+                    <div class="flex items-center text-white">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-accent">E-mail</h3>
+                            <a href="mailto:richardluizv@gmail.com" class="hover:text-accent transition-colors">richardluizv@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telefone -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6 group hover:scale-110 transition-all duration-500 group-hover:animate-float-hover">
+                    <div class="flex items-center text-white">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                            <i class="fas fa-phone text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-accent">Telefone</h3>
+                            <a href="tel:+5531984260143" class="hover:text-accent transition-colors">+55 31 984260143</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.linkedin.com/in/perfilricardolv/" target="_blank" rel="noopener noreferrer" 
+                   class="text-gray-400 hover:text-accent social-icon">
+                    <i class="fab fa-linkedin text-3xl"></i>
+                </a>
+                <a href="https://github.com/Ricardolv" target="_blank" rel="noopener noreferrer" 
+                   class="text-gray-400 hover:text-accent social-icon">
+                    <i class="fab fa-github text-3xl"></i>
+                </a>
+            </div>
+            <div class="text-center mt-4 text-gray-400 text-sm animate-pulse-subtle">
+                <p>&copy; 2024 Ricardo Viana. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
